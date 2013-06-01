@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="jaffreClient" class="org.jaffre.client.spi.SocketJaffreClient">
+		<property name="serviceAddress" value="localhost"/>
+		<property name="servicePort" value="4711"/>
+	</bean>
+
+	<bean id="jaffreServer" class="org.jaffre.server.spi.DefaultJaffreServer">
+		<property name="logInOutExceptions" value="true"/>
+	</bean>
+
+	<bean id="jaffreConnector"
+		class="org.jaffre.server.spi.SocketJaffreConnector"
+		init-method="start"
+		destroy-method="stop">
+		<property name="server" ref="jaffreServer"/>
+		<property name="bindingAddress" value="localhost"/>
+		<property name="port" value="4711"/>
+		<property name="coreThreadPoolSize" value="10"/>
+		<property name="maxThreadPoolSize" value="20"/>
+	</bean>
+
+	<bean id="jaffreExporter" class="org.jaffre.springframework.JaffreExporter">
+		<property name="server" ref="jaffreServer"/>
+		<property name="endpointList">
+			<list>
+				<idref local="throwException"/>
+			</list>
+		</property>
+		<property name="endpointMap">
+			<map>
+				<entry key="org.example.services.Greeting" value-ref="greeting"/>
+				<entry key="org.example.services.Salutation" value-ref="greeting"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="throwException" class="org.example.services.ThrowExceptionService"/>
+	<bean id="greeting" class="org.example.services.GreetingService"/>
+
+</beans>
