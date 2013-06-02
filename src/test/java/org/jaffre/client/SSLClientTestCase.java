@@ -19,10 +19,17 @@
 package org.jaffre.client;
 
 
+import java.net.UnknownHostException;
+
 import junit.framework.TestCase;
 
 import org.example.services.SomeTestMethods;
+import org.example.services.SomeTestMethodsService;
 import org.jaffre.client.spi.SSLSocketJaffreClient;
+import org.jaffre.server.JaffreServer;
+import org.jaffre.server.spi.DefaultJaffreServer;
+import org.jaffre.server.spi.SSLSocketJaffreConnector;
+import org.test.TestPort;
 
 
 /**
@@ -30,39 +37,76 @@ import org.jaffre.client.spi.SSLSocketJaffreClient;
  */
 public final class SSLClientTestCase extends TestCase
 {
+	private SSLSocketJaffreConnector m_connector;
+
 	private SSLSocketJaffreClient m_client;
 
 
 	@Override
 	public void setUp() throws Exception
 	{
-		final SSLSocketJaffreClient l_client;
-
-		l_client = new SSLSocketJaffreClient();
-
-		l_client.setServiceAddress("localhost");
-		l_client.setServicePort(1443);
-		l_client.setKeyStoreType("JCEKS");
-		l_client.setKeyStore("resources/keystore");
-		l_client.setKeyStorePassword("secret");
-		l_client.setTrustStoreType("JCEKS");
-		l_client.setTrustStore("resources/truststore");
-		l_client.setTrustStorePassword("secret");
-		//l_client.setKeepAlive(false);
-
-		m_client = l_client;
 	}
 
 
 	@Override
 	public void tearDown() throws Exception
 	{
+		m_connector.stop();
 		m_client.dispose();
+	}
+
+
+	private void setUpClientAndServer(int p_iPort)
+		throws UnknownHostException, InterruptedException
+	{
+		// server
+		final JaffreServer             l_server;
+		final SSLSocketJaffreConnector l_connector;
+
+		l_server = new DefaultJaffreServer();
+
+		l_server.registerInterface(new SomeTestMethodsService());
+
+		l_connector = new SSLSocketJaffreConnector();
+
+		l_connector.setServer(l_server);
+		l_connector.setBindingAddress("localhost");
+		l_connector.setPort(p_iPort);
+		l_connector.setKeyStore("resources/keystore");
+		l_connector.setKeyStoreType("JCEKS");
+		l_connector.setKeyStorePassword("secret");
+		l_connector.setTrustStore("resources/truststore");
+		l_connector.setTrustStoreType("JCEKS");
+		l_connector.setTrustStorePassword("secret");
+
+		l_connector.start();
+
+		m_connector = l_connector;
+
+		Thread.sleep(500L);
+
+		// client
+		final SSLSocketJaffreClient l_client;
+
+		l_client = new SSLSocketJaffreClient();
+
+		l_client.setServiceAddress("localhost");
+		l_client.setServicePort(p_iPort);
+		l_client.setKeyStoreType("JCEKS");
+		l_client.setKeyStore("resources/keystore");
+		l_client.setKeyStorePassword("secret");
+		l_client.setTrustStoreType("JCEKS");
+		l_client.setTrustStore("resources/truststore");
+		l_client.setTrustStorePassword("secret");
+
+		m_client = l_client;
 	}
 
 
 	public void testMultiDispose() throws Exception
 	{
+		setUpClientAndServer(TestPort.getNext());
+
 		m_client.dispose();
 		m_client.dispose();
 		m_client.dispose();
@@ -74,6 +118,8 @@ public final class SSLClientTestCase extends TestCase
 		final SomeTestMethods l_interface;
 		final String          l_strIn;
 		final String          l_strOut;
+
+		setUpClientAndServer(TestPort.getNext());
 
 		l_interface = m_client.getProxy(SomeTestMethods.class);
 
@@ -91,6 +137,8 @@ public final class SSLClientTestCase extends TestCase
 		final SomeTestMethods l_interface;
 		final String          l_strIn;
 		final String          l_strOut;
+
+		setUpClientAndServer(TestPort.getNext());
 
 		m_client.setKeepAlive(false);
 

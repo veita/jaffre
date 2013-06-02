@@ -31,6 +31,7 @@ import org.jaffre.client.spi.SocketJaffreClient;
 import org.jaffre.server.JaffreServer;
 import org.jaffre.server.spi.DefaultJaffreServer;
 import org.jaffre.server.spi.SocketJaffreConnector;
+import org.test.TestPort;
 
 
 /**
@@ -70,19 +71,20 @@ public final class SocketTransportTestCase extends TestCase
 		});
 
 		// setup the server
-		final JaffreServer l_server;
+		final int                   l_iPort;
+		final JaffreServer          l_server;
+		final SocketJaffreConnector l_connector;
 
+		l_iPort  = TestPort.getNext();
 		l_server = new DefaultJaffreServer();
 
 		l_server.registerInterface(ThrowException.class, new ThrowExceptionService());
-
-		final SocketJaffreConnector l_connector;
 
 		l_connector = new SocketJaffreConnector();
 
 		l_connector.setServer(l_server);
 		l_connector.setBindingAddress("localhost");
-		l_connector.setPort(9876);
+		l_connector.setPort(l_iPort);
 
 		l_connector.setCoreThreadPoolSize(1);
 
@@ -99,7 +101,7 @@ public final class SocketTransportTestCase extends TestCase
 			l_client = new SocketJaffreClient();
 
 			l_client.setServiceAddress("localhost");
-			l_client.setServicePort(9876);
+			l_client.setServicePort(l_iPort);
 
 			l_interface = l_client.getProxy(ThrowException.class);
 
@@ -131,17 +133,17 @@ public final class SocketTransportTestCase extends TestCase
 
 	public void testKeepAlive() throws Exception
 	{
-		_testKeepAlive(9877, true);
+		_testKeepAlive(TestPort.getNext(), true);
 	}
 
 
 	public void testNoKeepAlive() throws Exception
 	{
-		_testKeepAlive(9878, false);
+		_testKeepAlive(TestPort.getNext(), false);
 	}
 
 
-	public void _testKeepAlive(int p_iPort, boolean p_bKeepAlive) throws Exception
+	private void _testKeepAlive(int p_iPort, boolean p_bKeepAlive) throws Exception
 	{
 		TestLogger.push(new TestLogger.DefaultTestLogger()
 		{

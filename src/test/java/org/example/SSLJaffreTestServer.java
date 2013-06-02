@@ -19,9 +19,6 @@
 package org.example;
 
 
-import org.example.services.SomeTestMethods;
-import org.jaffre.Logger;
-import org.jaffre.LoggerFactory;
 import org.jaffre.server.JaffreServer;
 import org.jaffre.server.spi.DefaultJaffreServer;
 import org.jaffre.server.spi.SSLSocketJaffreConnector;
@@ -32,45 +29,7 @@ import org.jaffre.server.spi.SSLSocketJaffreConnector;
  */
 public class SSLJaffreTestServer
 {
-	private static final Logger ms_log = LoggerFactory.getLogger(SSLJaffreTestServer.class);
-
-
-	private static class SomeTestMethodsService implements SomeTestMethods
-	{
-		@Override
-		public int add(int p_iA, int p_iB)
-		{
-			return p_iA + p_iB;
-		}
-
-		@Override
-		public Object echo(Object p_obj)
-		{
-			return p_obj;
-		}
-
-		@Override
-		public String echo(String p_str)
-		{
-			return p_str;
-		}
-
-		@Override
-		public void log(String p_str)
-		{
-			ms_log.info(p_str);
-		}
-
-		@Override
-		public void throwException(String p_strExceptionClass) throws Exception
-		{
-			final Class<?> l_class;
-
-			l_class = Class.forName(p_strExceptionClass);
-
-			throw (Exception)(l_class.newInstance());
-		}
-	}
+	private static JaffreServer ms_server;
 
 
 	public static void main(String[] p_args)
@@ -92,6 +51,14 @@ public class SSLJaffreTestServer
 		l_iPort          = Integer.parseInt(p_args[1]);
 		l_iNumThreads    = Integer.parseInt(p_args[2]);
 
+		run(l_strBindAddress, l_iPort, l_iNumThreads);
+	}
+
+
+	public static void run(String p_strBindAddress,
+	                       int    p_iPort,
+	                       int    p_iNumThreads)
+	{
 		try
 		{
 			final JaffreServer l_server;
@@ -101,34 +68,44 @@ public class SSLJaffreTestServer
 			l_server.registerInterface(new SomeTestMethodsService());
 
 			// ...
-			SSLSocketJaffreConnector l_connector;
+			final SSLSocketJaffreConnector l_connector;
 
 			l_connector = new SSLSocketJaffreConnector();
 
 			l_connector.setServer(l_server);
-			l_connector.setBindingAddress(l_strBindAddress);
-			l_connector.setPort(l_iPort);
-			l_connector.setCoreThreadPoolSize(l_iNumThreads);
-			l_connector.setMaxThreadPoolSize(l_iNumThreads);
+			l_connector.setBindingAddress(p_strBindAddress);
+			l_connector.setPort(p_iPort);
+			l_connector.setCoreThreadPoolSize(p_iNumThreads);
+			l_connector.setMaxThreadPoolSize(p_iNumThreads);
 			l_connector.setKeyStore("resources/keystore");
 			l_connector.setKeyStoreType("JCEKS");
 			l_connector.setKeyStorePassword("secret");
 			l_connector.setTrustStore("resources/truststore");
 			l_connector.setTrustStoreType("JCEKS");
 			l_connector.setTrustStorePassword("secret");
-//			l_connector.setNeedClientAuth(true);
 
 			l_connector.start();
 
-			synchronized (l_server)
+			ms_server = l_server;
+
+			synchronized (ms_server)
 			{
-				l_server.wait();
+				ms_server.wait();
 			}
+
+			ms_server = null;
 		}
 		catch (Exception l_e)
 		{
 			l_e.printStackTrace();
 		}
+	}
+
+
+	public static void stop()
+	{
+		if (ms_server != null)
+			ms_server.notifyAll();
 	}
 }
 

@@ -381,6 +381,7 @@ public class SocketJaffreConnector extends AbstractSocketJaffreConnector
 			m_channel  = ServerSocketChannel.open();
 
 			// TODO make socket option SO_REUSEADDR configurable to handle time wait states
+			//m_channel.setOption(StandardSocketOptions.SO_REUSEADDR, Boolean.TRUE);
 			m_channel.configureBlocking(false);
 			m_channel.socket().bind(new InetSocketAddress(l_inetAddr, l_iPort));
 			m_channel.register(m_selector, SelectionKey.OP_ACCEPT, null);
