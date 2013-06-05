@@ -3,7 +3,7 @@ jaffre - Java Fat Free Remoting
 
 ## Introduction
 
-Jaffre is a leightweight RPC library for the Java platform.
+Jaffre is a lightweight RPC library for the Java platform.
 It is designed to be simple, extensible, robust, and efficient.
 Currently it supports transport over insecure or TLS encrypted
 TCP channels. It supports sessions and can be customized so that
