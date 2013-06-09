@@ -68,6 +68,8 @@ void runTheClient() throws Exception
 
 ```
 
+For code examples see the [samples directory](https://github.com/veita/jaffre/tree/master/src/samples). The JavaDocs can be found [here](http://veita.github.io/jaffre/docs/api/).
+
 ## Dependencies
 
 Jaffre does not have any required dependencies.
