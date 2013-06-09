@@ -6,8 +6,29 @@
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>jaffre</name>
-	<url>http://maven.apache.org</url>
+	<url>https://github.com/veita/jaffre</url>
+	<inceptionYear>2009</inceptionYear>
+	<organization>
+		<name>Alexander Veit</name>
+	</organization>
+	<developers>
+		<developer>
+			<id>veita</id>
+			<name>Alexander Veit</name>
+			<email>alexander.veit@gmx.net</email>
+		</developer>
+	</developers>
+	<scm>
+		<developerConnection>Alexander Veit</developerConnection>
+		<url>https://github.com/veita/jaffre.git</url>
+	</scm>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/veita/jaffre/issues</url>
+	</issueManagement>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<org.springframework.version>3.2.2.RELEASE</org.springframework.version>
 	</properties>
 	<dependencies>
@@ -58,22 +79,16 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	<developers>
-		<developer>
-			<name>Alexander Veit</name>
-			<email>alexander.veit@gmx.net</email>
-		</developer>
-	</developers>
-	<scm>
-		<developerConnection>Alexander Veit</developerConnection>
-		<url>https://github.com/veita/jaffre.git</url>
-	</scm>
-	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>https://github.com/veita/jaffre/issues</url>
-	</issueManagement>
 </project>
