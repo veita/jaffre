@@ -1,0 +1,10 @@
+org.jaffre
+org.jaffre.client
+org.jaffre.client.spi
+org.jaffre.io
+org.jaffre.server
+org.jaffre.server.spi
+org.jaffre.spi
+org.jaffre.springframework
+org.jaffre.ssl
+org.jaffre.util
