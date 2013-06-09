@@ -217,7 +217,7 @@ public abstract class AbstractSocketJaffreConnector implements JaffreConnector
 
 	/**
 	 * Set the serializer for Jaffre return frames.
-	 * @param p_deserializer The serializer for Jaffre return frames.
+	 * @param p_serializer The serializer for Jaffre return frames.
 	 */
 	public void setReturnFrameSerializer(JaffreReturnFrameSerializer p_serializer)
 	{

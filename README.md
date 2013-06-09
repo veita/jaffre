@@ -13,7 +13,7 @@ calls are performed as a particular session dependent subject.
 
 Implementing a service is as simple as defining a service interface,
 implementing it in a pojo, and registering that pojo as a service
-endpoint. The service is exposed to clients through one ore more
+endpoint. The service is exposed to clients through one or more
 connectors. Clients call the service through proxy classes.
 
 ```Java

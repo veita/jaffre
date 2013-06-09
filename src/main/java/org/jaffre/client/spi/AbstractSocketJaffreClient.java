@@ -186,7 +186,7 @@ public abstract class AbstractSocketJaffreClient implements JaffreClient, Jaffre
 
 	/**
 	 * Set the serializer for Jaffre return frames.
-	 * @param p_deserializer The serializer for Jaffre return frames.
+	 * @param p_serializer The serializer for Jaffre return frames.
 	 */
 	public void setReturnFrameSerializer(JaffreReturnFrameSerializer p_serializer)
 	{
@@ -265,8 +265,8 @@ public abstract class AbstractSocketJaffreClient implements JaffreClient, Jaffre
 	 * @param p_proxy
 	 * @param p_method
 	 * @param p_args
-	 * @return
-	 * @throws Throwable
+	 * @return The return value.
+	 * @throws Throwable If an error occurred.
 	 */
 	protected abstract Object invokeImpl(Class<?> p_interface,
 	                                     Object   p_proxy,
