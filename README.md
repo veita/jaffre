@@ -1,6 +1,8 @@
 jaffre - Java Fat Free Remoting
 ===============================
 
+[![Build Status](https://travis-ci.org/veita/jaffre.svg?branch=master)](https://travis-ci.org/veita/jaffre)
+
 ## Introduction
 
 Jaffre is a lightweight RPC library for the Java platform.
