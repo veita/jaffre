@@ -1,8 +1,10 @@
-/.settings
+/.settings/
 /.project
 /.classpath
-/.idea
+/.idea/
+/.gradle/
+/gradle/
 /jaffre.iml
-/bin
-/target
-
+/bin/
+/target/
+/build/
