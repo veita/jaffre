@@ -60,13 +60,16 @@ public final class SSLUtil
 	 * @param p_strPath The path to the keystore.
 	 * @param p_strPassphrase The keystore passphrase, or <code>null</code>.
 	 * @return The loaded keystore.
-	 * @throws KeyStoreException
-	 * @throws NoSuchAlgorithmException
-	 * @throws CertificateException
-	 * @throws IOException
+	 * @throws KeyStoreException If no provider supports the requested
+	 *    keystore type.
+	 * @throws NoSuchAlgorithmException If the algorithm used to check
+     *    the integrity of the keystore cannot be found.
+	 * @throws CertificateException If any of the certificates in the
+     *    keystore could not be loaded.
+	 * @throws IOException If an I/O error occurred.
 	 */
 	public static KeyStore loadKeyStore(String p_strType, String p_strPath, String p_strPassphrase)
-		throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException
+		throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException
 	{
 		final KeyStore l_ksKeyStore;
 		InputStream    l_in;
@@ -101,8 +104,15 @@ public final class SSLUtil
 	 * <code>p_inAppBuf</code> are clear when this method returns.</p>
 	 * <p>The buffer <code>p_inNetBuf</code> is compacted and may contain
 	 * input data that are not handshake but payload data.</p>
+	 * @param p_channel The socket channel.
+	 * @param p_sslEngine The SSL engine to be used.
+	 * @param p_outAppBuf The application output buffer.
+	 * @param p_outNetBuf The network output buffer.
+	 * @param p_inAppBuf The application input buffer.
+	 * @param p_inNetBuf The network input buffer.
+	 * @throws IOException If an I/O error occurred.
 	 */
-	public static void doHandshake(SocketChannel p_socketChannel,
+	public static void doHandshake(SocketChannel p_channel,
 	                               SSLEngine     p_sslEngine,
 	                               ByteBuffer    p_outAppBuf,
 	                               ByteBuffer    p_outNetBuf,
@@ -152,12 +162,12 @@ public final class SSLUtil
 
 			case NEED_UNWRAP:
 				ms_log.debug("SSL handshake status NEED_UNWRAP.");
-				_handshakeUnwrap(p_socketChannel, p_sslEngine, p_inAppBuf, p_inNetBuf);
+				_handshakeUnwrap(p_channel, p_sslEngine, p_inAppBuf, p_inNetBuf);
 				break;
 
 			case NEED_WRAP:
 				ms_log.debug("SSL handshake status NEED_WRAP.");
-				_handshakeWrap(p_socketChannel, p_sslEngine, p_outAppBuf, p_outNetBuf);
+				_handshakeWrap(p_channel, p_sslEngine, p_outAppBuf, p_outNetBuf);
 				break;
 
 			case NEED_TASK:
@@ -245,6 +255,9 @@ public final class SSLUtil
 	 * <p>The buffer <code>p_inAppBuf</code> is flipped an contains decrypted data when
 	 * this method returns.</p>
 	 * <p>The buffer <code>p_inNetBuf</code> is compacted when this method returns.</p>
+	 * @param p_inAppBuf The application input buffer.
+	 * @param p_inNetBuf The network input buffer.
+	 * @throws IOException If an I/O error occurred.
 	 */
 	private static void _handshakeUnwrap(SocketChannel p_channel,
 	                                     SSLEngine     p_sslEngine,
@@ -310,13 +323,18 @@ public final class SSLUtil
 
 
 	/**
+	 * Read data from the socket.
 	 * <p>The buffer <code>p_inAppBuf</code> is flipped and contains
 	 * decrypted data when this method returns.</p>
 	 * <p>The buffer <code>p_inNetBuf</code> is compacted when this
 	 * method returns. The caller must not modify the contents of this
 	 * buffer between two subsequent calls of this method</p>
+	 * @param p_channel The socket channel.
+	 * @param p_sslEngine The SSL engine to be used.
 	 * @param p_inAppBuf A compacted buffer that will receive decrypted data.
 	 * @param p_inNetBuf An buffer that will receive network data.
+	 * @throws IOException If an I/O error occurred.
+	 * @return The number of bytes read, or -1 if no more input is available.
 	 */
 	public static int read(SocketChannel p_channel,
 	                       SSLEngine     p_sslEngine,
@@ -381,6 +399,14 @@ public final class SSLUtil
 	}
 
 
+	/**
+	 * Write data to the socket.
+	 * @param p_channel The socket channel.
+	 * @param p_sslEngine The SSL engine to be used.
+	 * @param p_outAppBuf The application output buffer.
+	 * @param p_outNetBuf The network output buffer.
+	 * @throws IOException If an I/O error occurred.
+	 */
 	public static void write(SocketChannel p_channel,
 	                         SSLEngine     p_sslEngine,
 	                         ByteBuffer    p_outAppBuf,
@@ -485,7 +511,7 @@ public final class SSLUtil
 	 * @param p_sslEngine The SSL engine to be used.
 	 * @param p_inAppBuf The application input buffer.
 	 * @param p_inNetBuf The network input buffer.
-	 * @throws IOException
+	 * @throws IOException If an I/O error occurred.
 	 */
 	public static void readClosingMessage(SocketChannel p_channel,
 	                                      SSLEngine     p_sslEngine,

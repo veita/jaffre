@@ -35,7 +35,7 @@ public interface JaffreServer
 	 * by the endpoint and then call {@link #registerInterface(Class, Object)}
 	 * with the choosen interface and the given endpoint as arguments.</p>
 	 * @param p_obj A service endpoint that implements an interface.
-	 * @see #registerInterface(Class, Object).
+	 * @see #registerInterface(Class, Object)
 	 */
 	public void registerInterface(Object p_obj);
 

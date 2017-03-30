@@ -261,10 +261,10 @@ public abstract class AbstractSocketJaffreClient implements JaffreClient, Jaffre
 
 	/**
 	 * This method actually performs the remote call.
-	 * @param p_interface
-	 * @param p_proxy
-	 * @param p_method
-	 * @param p_args
+	 * @param p_interface The invoked interface.
+	 * @param p_proxy The proxy object the metod is invoked on.
+	 * @param p_method The method to be invoked.
+	 * @param p_args Method parameters.
 	 * @return The return value.
 	 * @throws Throwable If an error occurred.
 	 */

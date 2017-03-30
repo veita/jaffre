@@ -467,7 +467,7 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 	 * <code>SSLContext</code> than it is possible by using the
 	 * <code>setKeyXxx</code> and <code>setTrustXxx</code>
 	 * properties.</p>
-	 * @param p_sslContext
+	 * @param p_sslContext The <code>SSLContext</code> to be used.
 	 */
 	public void setSSLContext(SSLContext p_sslContext)
 	{

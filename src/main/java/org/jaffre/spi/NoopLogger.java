@@ -34,7 +34,7 @@ public class NoopLogger implements Logger
 
 	/**
 	 * @return Always <code>false</code>.
-	 * @see org.jaffre.Logger#isErrorEnabled().
+	 * @see org.jaffre.Logger#isErrorEnabled()
 	 */
 	@Override
 	public boolean isErrorEnabled()
@@ -63,7 +63,7 @@ public class NoopLogger implements Logger
 
 	/**
 	 * @return Always <code>false</code>.
-	 * @see org.jaffre.Logger#isWarnEnabled().
+	 * @see org.jaffre.Logger#isWarnEnabled()
 	 */
 	@Override
 	public boolean isWarnEnabled()
@@ -92,7 +92,7 @@ public class NoopLogger implements Logger
 
 	/**
 	 * @return Always <code>false</code>.
-	 * @see org.jaffre.Logger#isInfoEnabled().
+	 * @see org.jaffre.Logger#isInfoEnabled()
 	 */
 	@Override
 	public boolean isInfoEnabled()
@@ -121,7 +121,7 @@ public class NoopLogger implements Logger
 
 	/**
 	 * @return Always <code>false</code>.
-	 * @see org.jaffre.Logger#isDebugEnabled().
+	 * @see org.jaffre.Logger#isDebugEnabled()
 	 */
 	@Override
 	public boolean isDebugEnabled()
@@ -150,7 +150,7 @@ public class NoopLogger implements Logger
 
 	/**
 	 * @return Always <code>false</code>.
-	 * @see org.jaffre.Logger#isTraceEnabled().
+	 * @see org.jaffre.Logger#isTraceEnabled()
 	 */
 	@Override
 	public boolean isTraceEnabled()

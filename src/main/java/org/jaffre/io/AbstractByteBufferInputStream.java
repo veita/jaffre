@@ -260,14 +260,13 @@ public abstract class AbstractByteBufferInputStream extends InputStream
 
 	/**
 	 * Read bytes into the given input buffer.
-	 * <p>Note:
+	 * <p>Note:</p>
 	 * <ul>
 	 * <li>The input buffer passed is compacted.</li>
 	 * <li>Implementors <b>must</b> ensure that this method will never return 0.</li>
 	 * <li>Also, this method <b>must</b> prepare the input buffer for subsequent relative
-	 * <code>get</code> operations.
+	 * <code>get</code> operations.</li>
 	 * </ul>
-	 * </p>
 	 * @param p_buffer The buffer.
 	 * @return The number of bytes read, or <code>-1</code> if no
 	 *    more input is available.

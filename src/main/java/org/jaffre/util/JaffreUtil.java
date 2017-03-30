@@ -30,7 +30,7 @@ import java.net.Socket;
 public final class JaffreUtil
 {
 	/**
-	 * @param <T>
+	 * @param <T> The closable type.
 	 * @param p_closee The closeable object to be closed.
 	 * @return Always <code>null</code>.
 	 */
@@ -53,7 +53,7 @@ public final class JaffreUtil
 
 
 	/**
-	 * @param <T>
+	 * @param <T> The closable type.
 	 * @param p_closee The socket to be closed.
 	 * @return Always <code>null</code>.
 	 */
