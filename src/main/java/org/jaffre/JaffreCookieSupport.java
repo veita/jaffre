@@ -31,5 +31,5 @@ public interface JaffreCookieSupport
 
 	public boolean isAcceptCookies();
 
-	public void setAcceptCookies(boolean p_bSendCookies);
+	public void setAcceptCookies(boolean p_bAcceptCookies);
 }

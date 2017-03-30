@@ -60,6 +60,8 @@ public class AbstractByteBufferInputStreamTestCase extends TestCase
 		assertEquals(-1, l_in.read());
 		assertEquals(-1, l_in.read(new byte[10]));
 		assertEquals(-1, l_in.read(new byte[10]));
+
+		l_in.close();
 	}
 
 
@@ -80,6 +82,8 @@ public class AbstractByteBufferInputStreamTestCase extends TestCase
 		assertEquals(0, l_in.skip(1));
 		assertEquals(0, l_in.skip(0));
 		assertEquals(0, l_in.skip(1));
+
+		l_in.close();
 	}
 
 
@@ -151,6 +155,8 @@ public class AbstractByteBufferInputStreamTestCase extends TestCase
 
 		while ((l_iRead = l_in.read()) != -1)
 			l_baos.write(l_iRead);
+
+		l_in.close();
 
 		return l_baos.toByteArray();
 	}
@@ -226,6 +232,8 @@ public class AbstractByteBufferInputStreamTestCase extends TestCase
 
 		while ((l_iRead = l_in.read(l_buf, 0, 1 + (int)(13 * Math.random()))) != -1)
 			l_baos.write(l_buf, 0, l_iRead);
+
+		l_in.close();
 
 		return l_baos.toByteArray();
 	}
