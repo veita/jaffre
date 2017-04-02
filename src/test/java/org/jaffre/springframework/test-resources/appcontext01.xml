@@ -5,7 +5,7 @@
 
 	<bean id="jaffreClient" class="org.jaffre.client.spi.SocketJaffreClient">
 		<property name="serviceAddress" value="localhost"/>
-		<property name="servicePort" value="4711"/>
+		<property name="servicePort" value="14711"/>
 	</bean>
 
 	<bean id="jaffreServer" class="org.jaffre.server.spi.DefaultJaffreServer">
@@ -18,7 +18,7 @@
 		destroy-method="stop">
 		<property name="server" ref="jaffreServer"/>
 		<property name="bindingAddress" value="localhost"/>
-		<property name="port" value="4711"/>
+		<property name="port" value="14711"/>
 		<property name="coreThreadPoolSize" value="10"/>
 		<property name="maxThreadPoolSize" value="20"/>
 	</bean>
