@@ -1,6 +1,5 @@
-/* $Id: $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2017 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -19,8 +18,6 @@
 package org.jaffre;
 
 
-import junit.framework.TestCase;
-
 import org.example.services.Greeting;
 import org.example.services.GreetingService;
 import org.jaffre.client.JaffreClient;
@@ -28,12 +25,13 @@ import org.jaffre.client.spi.LocalVmJaffreClient;
 import org.jaffre.server.JaffreServer;
 import org.jaffre.server.spi.DefaultJaffreServer;
 import org.jaffre.server.spi.LocalVmJaffreConnector;
+import org.test.JaffreTestCaseBase;
 
 
 /**
  * @author Alexander Veit
  */
-public final class LocalVmTransportTestCase extends TestCase
+public final class LocalVmTransportTestCase extends JaffreTestCaseBase
 {
 	@Override
 	protected void tearDown() throws Exception

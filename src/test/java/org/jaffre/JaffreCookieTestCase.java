@@ -1,6 +1,5 @@
-/* $Id: JaffreCookieTestCase.java 394 2009-03-21 20:28:26Z  $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2017 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -20,13 +19,13 @@ package org.jaffre;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import junit.framework.TestCase;
+import org.test.JaffreTestCaseBase;
 
 
 /**
  * @author Alexander Veit
  */
-public class JaffreCookieTestCase extends TestCase
+public final class JaffreCookieTestCase extends JaffreTestCaseBase
 {
 	private static final String COOKIE = "cookie";
 
@@ -45,7 +44,7 @@ public class JaffreCookieTestCase extends TestCase
 			JaffreCookie.set(COOKIE);
 			assertSame(COOKIE, JaffreCookie.get());
 
-			l_ref = new AtomicReference<Boolean>();
+			l_ref = new AtomicReference<>();
 			assertNull(l_ref.get());
 
 			l_thread = new Thread("otherThread")

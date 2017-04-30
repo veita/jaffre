@@ -1,6 +1,5 @@
-/* $Id: DefaultJaffreCallFrameSerializerTestCase.java 394 2009-03-21 20:28:26Z  $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2017 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -21,18 +20,48 @@ package org.jaffre.spi;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-
-import junit.framework.TestCase;
+import java.io.IOException;
 
 import org.jaffre.JaffreCallFrame;
+import org.test.JaffreTestCaseBase;
 
 
 /**
  * @author Alexander Veit
  */
-public final class DefaultJaffreCallFrameSerializerTestCase extends TestCase
+public final class DefaultJaffreCallFrameSerializerTestCase extends JaffreTestCaseBase
 {
-	public void test() throws Exception
+	public void testSerializeIllegalArgumentException01()
+		throws IOException
+	{
+		assertIAE(
+			() -> new DefaultJaffreCallFrameSerializer().serialize(null, null),
+			"No call frame to serialize.");
+	}
+
+
+	public void testSerializeIllegalArgumentException02()
+		throws IOException
+	{
+		final JaffreCallFrame l_frame;
+
+		l_frame = new JaffreCallFrame(Runnable.class, "run", null, null);
+
+		assertIAE(
+			() -> new DefaultJaffreCallFrameSerializer().serialize(l_frame, null),
+			"No output stream.");
+	}
+
+
+	public void testDeserializeIllegalArgumentException() throws Exception
+	{
+		assertIAE(
+			() -> new DefaultJaffreCallFrameSerializer().deserialize(null),
+			"No input stream.");
+	}
+
+
+	public void testSerializeDeserialize() throws Exception
 	{
 		final JaffreCallFrame                  l_frame;
 		final DefaultJaffreCallFrameSerializer l_ser;

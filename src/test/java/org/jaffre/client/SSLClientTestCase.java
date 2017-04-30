@@ -1,6 +1,5 @@
-/* $Id: SSLClientTestCase.java 394 2009-03-21 20:28:26Z  $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2017 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -21,21 +20,20 @@ package org.jaffre.client;
 
 import java.net.UnknownHostException;
 
-import junit.framework.TestCase;
-
 import org.example.services.SomeTestMethods;
 import org.example.services.SomeTestMethodsService;
 import org.jaffre.client.spi.SSLSocketJaffreClient;
 import org.jaffre.server.JaffreServer;
 import org.jaffre.server.spi.DefaultJaffreServer;
 import org.jaffre.server.spi.SSLSocketJaffreConnector;
+import org.test.JaffreTestCaseBase;
 import org.test.TestPort;
 
 
 /**
  * @author Alexander Veit
  */
-public final class SSLClientTestCase extends TestCase
+public final class SSLClientTestCase extends JaffreTestCaseBase
 {
 	private SSLSocketJaffreConnector m_connector;
 
@@ -123,7 +121,7 @@ public final class SSLClientTestCase extends TestCase
 
 		l_interface = m_client.getProxy(SomeTestMethods.class);
 
-		l_strIn  = "The rain in spain stays always in the plain.";
+		l_strIn  = "The rain in spain stays mainly in the plain.";
 		l_strOut = l_interface.echo(l_strIn);
 
 		assert(l_strIn.equals(l_strOut));
@@ -144,7 +142,7 @@ public final class SSLClientTestCase extends TestCase
 
 		l_interface = m_client.getProxy(SomeTestMethods.class);
 
-		l_strIn  = "The rain in spain stays always in the plain.";
+		l_strIn  = "The rain in spain stays mainly in the plain.";
 		l_strOut = l_interface.echo(l_strIn);
 
 		assert(l_strIn.equals(l_strOut));

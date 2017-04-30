@@ -1,6 +1,5 @@
-/* $Id: JaffreExporterTestCase.java 394 2009-03-21 20:28:26Z  $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2017 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -21,16 +20,15 @@ package org.jaffre.springframework;
 
 import java.io.File;
 
-import junit.framework.TestCase;
-
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.test.JaffreTestCaseBase;
 import org.test.PackageFile;
 
 
 /**
  * @author Alexander Veit
  */
-public class JaffreExporterTestCase extends TestCase
+public final class JaffreExporterTestCase extends JaffreTestCaseBase
 {
 	public void test() throws Exception
 	{

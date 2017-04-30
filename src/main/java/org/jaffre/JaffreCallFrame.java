@@ -261,8 +261,12 @@ public final class JaffreCallFrame implements Serializable
 			return m_iHashCode;
 
 		m_iHashCode =
-			f ^ i.hashCode() ^ m.hashCode() ^ t.hashCode() ^
-			a.hashCode() ^ (u == null ? 0 : u.hashCode());
+			f ^
+			i.hashCode() ^
+			m.hashCode() ^
+			Arrays.hashCode(t) ^
+			Arrays.hashCode(a) ^
+			(u == null ? 0 : u.hashCode());
 
 		return m_iHashCode;
 	}

@@ -1,6 +1,5 @@
-/* $Id: AbstractByteBufferInputStreamTestCase.java 394 2009-03-21 20:28:26Z  $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2017 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -25,13 +24,13 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import junit.framework.TestCase;
+import org.test.JaffreTestCaseBase;
 
 
 /**
  * @author Alexander Veit
  */
-public class AbstractByteBufferInputStreamTestCase extends TestCase
+public final class AbstractByteBufferInputStreamTestCase extends JaffreTestCaseBase
 {
 	private static final String TEXT =
 		"Java is a programming language originally developed by Sun Microsystems and" +

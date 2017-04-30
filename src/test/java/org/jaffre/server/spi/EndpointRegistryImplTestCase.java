@@ -1,6 +1,5 @@
-/* $Id: EndpointRegistryImplTestCase.java 394 2009-03-21 20:28:26Z  $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2017 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -19,17 +18,16 @@
 package org.jaffre.server.spi;
 
 
-import junit.framework.TestCase;
-
 import org.example.services.DerivedEchoService;
 import org.example.services.Echo;
 import org.example.services.EchoService;
+import org.test.JaffreTestCaseBase;
 
 
 /**
  * @author Alexander Veit
  */
-public final class EndpointRegistryImplTestCase extends TestCase
+public final class EndpointRegistryImplTestCase extends JaffreTestCaseBase
 {
 	public void testClassImplementsInterface() throws Exception
 	{
