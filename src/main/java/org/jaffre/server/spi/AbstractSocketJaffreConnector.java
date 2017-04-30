@@ -71,7 +71,7 @@ public abstract class AbstractSocketJaffreConnector implements JaffreConnector
 
 		if (p_iCoreThreadPoolSize < 1)
 		{
-			throw new IllegalArgumentException
+			throw new JaffreConfigurationException
 				(p_iCoreThreadPoolSize + " is not a valid thread pool size.");
 		}
 
@@ -92,7 +92,7 @@ public abstract class AbstractSocketJaffreConnector implements JaffreConnector
 
 		if (p_iMaxThreadPoolSize < 1)
 		{
-			throw new IllegalArgumentException
+			throw new JaffreConfigurationException
 				(p_iMaxThreadPoolSize + " is not a valid maximum thread pool size.");
 		}
 
@@ -116,13 +116,12 @@ public abstract class AbstractSocketJaffreConnector implements JaffreConnector
 	 * Set the timeout to wait for worker threads when this connector's
 	 * {@link #stop()} method is being called.
 	 * @param p_lStopTimeout The timeout in milliseconds.
-	 * @throws IllegalArgumentException - If <code>p_lStopTimeout</code>
-	 *    is negative.
+	 * @throws JaffreConfigurationException - If the timeout is negative.
 	 */
 	public void setStopTimeout(long p_lStopTimeout)
 	{
 		if (p_lStopTimeout < 0)
-			throw new IllegalArgumentException("Negative timeout value.");
+			throw new JaffreConfigurationException("Negative timeout value.");
 
 		m_lStopTimeout = p_lStopTimeout;
 	}
