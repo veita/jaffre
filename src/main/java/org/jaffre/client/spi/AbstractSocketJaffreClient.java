@@ -26,6 +26,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.jaffre.JaffreCallFrameSerializer;
+import org.jaffre.JaffreConfigurationException;
 import org.jaffre.JaffreCookieSupport;
 import org.jaffre.JaffreReturnFrameSerializer;
 import org.jaffre.client.JaffreClient;
@@ -120,13 +121,13 @@ public abstract class AbstractSocketJaffreClient implements JaffreClient, Jaffre
 	/**
 	 * Set the port this client connects to.
 	 * @param p_iPort The port this client connects to.
-	 * @throws IllegalArgumentException
+	 * @throws JaffreConfigurationException
 	 *    If an illegal port number was specified.
 	 */
 	public synchronized void setServicePort(int p_iPort)
 	{
 		if (p_iPort < 0 || p_iPort > 0xFFFF)
-			throw new IllegalArgumentException("Illegal port number " + p_iPort + ".");
+			throw new JaffreConfigurationException("Illegal port number " + p_iPort + ".");
 
 		m_iPort = p_iPort;
 	}
@@ -246,7 +247,7 @@ public abstract class AbstractSocketJaffreClient implements JaffreClient, Jaffre
 		@SuppressWarnings("unchecked")
 		final T l_proxy = (T)Proxy.newProxyInstance(p_interface.getClassLoader(),
 		                                            new Class<?>[] {p_interface},
-		                                            new InvocationHandlerImpl<T>(p_interface));
+		                                            new InvocationHandlerImpl<>(p_interface));
 
 		return l_proxy;
 	}
