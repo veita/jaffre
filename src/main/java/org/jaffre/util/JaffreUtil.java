@@ -78,7 +78,7 @@ public final class JaffreUtil
 	/**
 	 * Check if the given <code>java.lang.Throwable</code> is a declared
 	 * throwable of the given method.
-	 * @param p_e The trowable.
+	 * @param p_e The throwable.
 	 * @param p_method The method.
 	 * @return <code>true</code> if <code>p_method</code> declares to throw
 	 *    <code>p_e</code>, or <code>false</code> otherwise.
