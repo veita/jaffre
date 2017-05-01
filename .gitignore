@@ -3,8 +3,8 @@
 /.classpath
 /.idea/
 /.gradle/
-/gradle/
 /jaffre.iml
 /bin/
+/docs/
 /target/
 /build/
