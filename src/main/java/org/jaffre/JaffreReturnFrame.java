@@ -35,7 +35,7 @@ public final class JaffreReturnFrame implements Serializable
 	private final boolean e; // must be the first field in the class definition
 
 	/** Bit flags. */
-	private int f; // must be the second field in the class definition
+	private int f = JAFFRE_FLAG.NO_FLAGS; // must be the second field in the class definition
 
 	/** The result object. */
 	private final Object r;

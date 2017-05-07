@@ -32,7 +32,7 @@ public final class JaffreReturnFrameTestCase extends JaffreTestCaseBase
 
 		l_frame = new JaffreReturnFrame("the result value", false);
 
-		assertEquals(0, l_frame.getFlags());
+		assertEquals(JAFFRE_FLAG.NO_FLAGS, l_frame.getFlags());
 		assertEquals(l_frame.isClose(), !l_frame.isKeepAlive());
 		assertFalse(l_frame.isKeepAlive());
 		assertTrue(l_frame.isClose());

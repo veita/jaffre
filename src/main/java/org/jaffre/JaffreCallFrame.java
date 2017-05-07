@@ -37,7 +37,7 @@ public final class JaffreCallFrame implements Serializable
 	private transient int m_iHashCode;
 
 	/** Bit flags. */
-	private int f = 0; // must be the first field in the class definition
+	private int f = JAFFRE_FLAG.NO_FLAGS; // must be the first field in the class definition
 
 	/** The interface to be called. */
 	private final Class<?> i;

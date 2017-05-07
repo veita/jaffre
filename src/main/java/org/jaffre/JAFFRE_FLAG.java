@@ -24,6 +24,9 @@ package org.jaffre;
  */
 public final class JAFFRE_FLAG
 {
+	/** <code>0x00000000</code> */
+	public static final int NO_FLAGS = 0x00000000;
+
 	/** <code>0xFFFF0000</code> */
 	public static final int MASK_CUSTOM = 0xFFFF0000;
 

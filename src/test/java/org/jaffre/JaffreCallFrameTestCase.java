@@ -57,7 +57,7 @@ public final class JaffreCallFrameTestCase extends JaffreTestCaseBase
 		l_frame = new JaffreCallFrame
 			(IntFunction.class, "apply", new Class[] {int.class}, new Object[] {785});
 
-		assertEquals(0, l_frame.getFlags());
+		assertEquals(JAFFRE_FLAG.NO_FLAGS, l_frame.getFlags());
 		assertFalse(l_frame.isInOnly());
 		assertFalse(l_frame.isInOut());
 		assertEquals(l_frame.isClose(), !l_frame.isKeepAlive());
