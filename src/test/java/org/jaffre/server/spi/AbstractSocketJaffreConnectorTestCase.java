@@ -18,15 +18,12 @@
 package org.jaffre.server.spi;
 
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 
 import org.jaffre.JaffreCallFrame;
 import org.jaffre.JaffreCallFrameSerializer;
-import org.jaffre.JaffreConfigurationException;
 import org.jaffre.JaffreReturnFrame;
 import org.jaffre.JaffreReturnFrameSerializer;
 import org.jaffre.spi.DefaultJaffreCallFrameSerializer;
@@ -97,7 +94,7 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 		};
 
 		assertEquals(1000L, l_connector.getStopTimeout());
-		assertThrows(JaffreConfigurationException.class, () -> l_connector.setStopTimeout(-1L));
+		assertJCE(() -> l_connector.setStopTimeout(-1L));
 		l_connector.setStopTimeout(65432L);
 		assertEquals(65432L, l_connector.getStopTimeout());
 
@@ -106,17 +103,17 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 		assertEquals("127.0.0.123", l_connector.getBindingInetAddress().getHostAddress());
 
 		assertEquals(-1, l_connector.getPort());
-		assertThrows(JaffreConfigurationException.class, () -> l_connector.setPort(-1));
+		assertJCE(() -> l_connector.setPort(-1));
 		l_connector.setPort(4711);
 		assertEquals(4711, l_connector.getPort());
 
 		assertEquals(4, l_connector.getCoreThreadPoolSize());
-		assertThrows(JaffreConfigurationException.class, () -> l_connector.setCoreThreadPoolSize(-1));
+		assertJCE(() -> l_connector.setCoreThreadPoolSize(-1));
 		l_connector.setCoreThreadPoolSize(7);
 		assertEquals(7, l_connector.getCoreThreadPoolSize());
 
 		assertEquals(10, l_connector.getMaxThreadPoolSize());
-		assertThrows(JaffreConfigurationException.class, () -> l_connector.setMaxThreadPoolSize(-1));
+		assertJCE(() -> l_connector.setMaxThreadPoolSize(-1));
 		l_connector.setMaxThreadPoolSize(11);
 		assertEquals(11, l_connector.getMaxThreadPoolSize());
 
