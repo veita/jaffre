@@ -39,16 +39,12 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.jaffre.JaffreCallFrame;
-import org.jaffre.JaffreCallFrameSerializer;
 import org.jaffre.JaffreConfigurationException;
 import org.jaffre.JaffreReturnFrame;
-import org.jaffre.JaffreReturnFrameSerializer;
 import org.jaffre.JaffreSerializeException;
 import org.jaffre.Logger;
 import org.jaffre.LoggerFactory;
 import org.jaffre.server.JaffreServerException;
-import org.jaffre.spi.DefaultJaffreCallFrameSerializer;
-import org.jaffre.spi.DefaultJaffreReturnFrameSerializer;
 import org.jaffre.util.JaffreUtil;
 
 
@@ -78,10 +74,6 @@ public class SocketJaffreConnector extends AbstractSocketJaffreConnector
 
 
 	private int m_iBufferSize = 8192;
-
-	private JaffreCallFrameSerializer m_serCall = new DefaultJaffreCallFrameSerializer();
-
-	private JaffreReturnFrameSerializer m_serRtrn = new DefaultJaffreReturnFrameSerializer();
 
 
 	/**
@@ -137,19 +129,11 @@ public class SocketJaffreConnector extends AbstractSocketJaffreConnector
 
 				while (_shouldRun())
 				{
-					try
+					try (final SocketChannel l_channel = _select())
 					{
-						final SocketChannel l_channel;
-
-						l_channel = _select();
-
 						if (l_channel != null)
 						{
-							Socket l_socket;
-
-							l_socket = null;
-
-							try
+							try (final Socket l_socket = l_channel.socket())
 							{
 								// start new workers if neccessary and allowed
 								if (m_intEngaged.incrementAndGet() >= m_intRunning.get())
@@ -158,15 +142,10 @@ public class SocketJaffreConnector extends AbstractSocketJaffreConnector
 										_startWorkerThread();
 								}
 
-								l_socket = l_channel.socket();
-
 								_process(l_socket);
 							}
 							finally
 							{
-								JaffreUtil.close(l_socket);
-								JaffreUtil.close(l_channel);
-
 								m_intEngaged.decrementAndGet();
 							}
 						}
@@ -282,17 +261,9 @@ public class SocketJaffreConnector extends AbstractSocketJaffreConnector
 			throws ClosedByInterruptException, ClosedChannelException, IOException,
 				JaffreSerializeException, ClassNotFoundException
 		{
-			BufferedInputStream  l_in;
-			BufferedOutputStream l_out;
-
-			l_in  = null;
-			l_out = null;
-
-			try
+			try (BufferedInputStream  l_in  = new BufferedInputStream(p_socket.getInputStream(), m_iBufferSize);
+			     BufferedOutputStream l_out = new BufferedOutputStream(p_socket.getOutputStream(), m_iBufferSize))
 			{
-				l_in  = new BufferedInputStream(p_socket.getInputStream(), m_iBufferSize);
-				l_out = new BufferedOutputStream(p_socket.getOutputStream(), m_iBufferSize);
-
 				dialog:
 				while (m_bRun)
 				{
@@ -300,7 +271,7 @@ public class SocketJaffreConnector extends AbstractSocketJaffreConnector
 					final boolean           l_bKeepAlive;
 					final JaffreReturnFrame l_frameReturn;
 
-					l_frameCall = m_serCall.deserialize(l_in);
+					l_frameCall = getCallFrameSerializer().deserialize(l_in);
 
 					if (l_frameCall == null)
 						break dialog;
@@ -313,18 +284,13 @@ public class SocketJaffreConnector extends AbstractSocketJaffreConnector
 					{
 						l_frameReturn.setKeepAlive(l_bKeepAlive);
 
-						m_serRtrn.serialize(l_frameReturn, l_out);
+						getReturnFrameSerializer().serialize(l_frameReturn, l_out);
 						l_out.flush();
 					}
 
 					if (!l_bKeepAlive || !canKeepAlive())
 						break dialog;
 				}
-			}
-			finally
-			{
-				JaffreUtil.close(l_in);
-				JaffreUtil.close(l_out);
 			}
 		}
 	}

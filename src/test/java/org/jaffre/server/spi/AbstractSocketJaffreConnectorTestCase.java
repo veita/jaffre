@@ -18,8 +18,19 @@
 package org.jaffre.server.spi;
 
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 
+import org.jaffre.JaffreCallFrame;
+import org.jaffre.JaffreCallFrameSerializer;
+import org.jaffre.JaffreConfigurationException;
+import org.jaffre.JaffreReturnFrame;
+import org.jaffre.JaffreReturnFrameSerializer;
+import org.jaffre.spi.DefaultJaffreCallFrameSerializer;
+import org.jaffre.spi.DefaultJaffreReturnFrameSerializer;
 import org.test.JaffreTestCaseBase;
 
 
@@ -28,6 +39,38 @@ import org.test.JaffreTestCaseBase;
  */
 public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseBase
 {
+	private static final JaffreCallFrameSerializer CALL = new JaffreCallFrameSerializer()
+	{
+		@Override
+		public void serialize(JaffreCallFrame p_frame, OutputStream p_out)
+		{
+			throw new AssertionError();
+		}
+
+		@Override
+		public JaffreCallFrame deserialize(InputStream p_in)
+		{
+			throw new AssertionError();
+		}
+	};
+
+
+	private static final JaffreReturnFrameSerializer RTRN = new JaffreReturnFrameSerializer()
+	{
+		@Override
+		public void serialize(JaffreReturnFrame p_frame, OutputStream p_out)
+		{
+			throw new AssertionError();
+		}
+
+		@Override
+		public JaffreReturnFrame deserialize(InputStream p_in)
+		{
+			throw new AssertionError();
+		}
+	};
+
+
 	public void testConfigureStoppedState() throws Exception
 	{
 		final AbstractSocketJaffreConnector l_connector;
@@ -53,28 +96,41 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 			}
 		};
 
+		assertEquals(1000L, l_connector.getStopTimeout());
+		assertThrows(JaffreConfigurationException.class, () -> l_connector.setStopTimeout(-1L));
+		l_connector.setStopTimeout(65432L);
+		assertEquals(65432L, l_connector.getStopTimeout());
+
 		assertNull(l_connector.getBindingInetAddress());
-		l_connector.setBindingAddress("10.1.1.1");
-		assertEquals("10.1.1.1", l_connector.getBindingInetAddress().getHostAddress());
+		l_connector.setBindingAddress("127.0.0.123");
+		assertEquals("127.0.0.123", l_connector.getBindingInetAddress().getHostAddress());
 
-		l_connector.setBindingInetAddress(InetAddress.getByName("10.1.1.2"));
-		assertEquals("10.1.1.2", l_connector.getBindingInetAddress().getHostAddress());
+		assertEquals(-1, l_connector.getPort());
+		assertThrows(JaffreConfigurationException.class, () -> l_connector.setPort(-1));
+		l_connector.setPort(4711);
+		assertEquals(4711, l_connector.getPort());
 
-		l_connector.setPort(8815);
-		assertEquals(8815, l_connector.getPort());
+		assertEquals(4, l_connector.getCoreThreadPoolSize());
+		assertThrows(JaffreConfigurationException.class, () -> l_connector.setCoreThreadPoolSize(-1));
+		l_connector.setCoreThreadPoolSize(7);
+		assertEquals(7, l_connector.getCoreThreadPoolSize());
 
-		l_connector.setCoreThreadPoolSize(101);
-		assertEquals(101, l_connector.getCoreThreadPoolSize());
-
-		l_connector.setMaxThreadPoolSize(1331);
-		assertEquals(1331, l_connector.getMaxThreadPoolSize());
-
-		l_connector.setStopTimeout(12345);
-		assertEquals(12345, l_connector.getStopTimeout());
+		assertEquals(10, l_connector.getMaxThreadPoolSize());
+		assertThrows(JaffreConfigurationException.class, () -> l_connector.setMaxThreadPoolSize(-1));
+		l_connector.setMaxThreadPoolSize(11);
+		assertEquals(11, l_connector.getMaxThreadPoolSize());
 
 		assertNull(l_connector.getServer());
 		l_connector.setServer(new DefaultJaffreServer());
 		assertNotNull(l_connector.getServer());
+
+		assertTrue(l_connector.getCallFrameSerializer() instanceof DefaultJaffreCallFrameSerializer);
+		l_connector.setCallFrameSerializer(CALL);
+		assertSame(CALL, l_connector.getCallFrameSerializer());
+
+		assertTrue(l_connector.getReturnFrameSerializer() instanceof DefaultJaffreReturnFrameSerializer);
+		l_connector.setReturnFrameSerializer(RTRN);
+		assertSame(RTRN, l_connector.getReturnFrameSerializer());
 	}
 
 

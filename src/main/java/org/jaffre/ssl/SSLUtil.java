@@ -38,7 +38,6 @@ import javax.net.ssl.SSLEngineResult.Status;
 
 import org.jaffre.Logger;
 import org.jaffre.LoggerFactory;
-import org.jaffre.util.JaffreUtil;
 
 
 /**
@@ -72,25 +71,16 @@ public final class SSLUtil
 		throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException
 	{
 		final KeyStore l_ksKeyStore;
-		InputStream    l_in;
 
 		if (p_strType != null)
 			l_ksKeyStore = KeyStore.getInstance(p_strType);
 		else
 			l_ksKeyStore = KeyStore.getInstance(KeyStore.getDefaultType());
 
-		l_in = null;
-
-		try
+		try (InputStream l_in = new BufferedInputStream(new FileInputStream(p_strPath)))
 		{
-			l_in = new BufferedInputStream(new FileInputStream(p_strPath));
-
 			l_ksKeyStore.load
 				(l_in, p_strPassphrase != null ? p_strPassphrase.toCharArray() : null);
-		}
-		finally
-		{
-			JaffreUtil.close(l_in);
 		}
 
 		return l_ksKeyStore;

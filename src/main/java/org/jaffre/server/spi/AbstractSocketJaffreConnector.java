@@ -159,10 +159,7 @@ public abstract class AbstractSocketJaffreConnector implements JaffreConnector
 	public void setBindingAddress(String p_strBindingAddress)
 		throws UnknownHostException
 	{
-		if (isRunning())
-			throw new IllegalStateException();
-
-		m_inetAddr = InetAddress.getByName(p_strBindingAddress);
+		setBindingInetAddress(InetAddress.getByName(p_strBindingAddress));
 	}
 
 

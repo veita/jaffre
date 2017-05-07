@@ -168,12 +168,8 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 
 				while (_shouldRun())
 				{
-					try
+					try (final SocketChannel l_channel = _select())
 					{
-						final SocketChannel l_channel;
-
-						l_channel = _select();
-
 						if (l_channel != null)
 						{
 							try
@@ -189,8 +185,6 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 							}
 							finally
 							{
-								JaffreUtil.close(l_channel);
-
 								m_intEngaged.decrementAndGet();
 							}
 						}
