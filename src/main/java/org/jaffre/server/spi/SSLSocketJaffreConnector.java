@@ -94,7 +94,7 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 
 	private SSLContext m_sslContextCustom;
 
-	private String m_strProtocol = "TLS";
+	private String m_strProtocol = "TLSv1.2";
 
 	private String m_strKsType;
 
@@ -425,27 +425,12 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 
 	public SSLSocketJaffreConnector()
 	{
-		m_strKsPath     = _sysProp("javax.net.ssl.keyStore");
-		m_strKsPassword = _sysProp("javax.net.ssl.keyStorePassword");
-		m_strKsType     = _sysProp("javax.net.ssl.keyStoreType");
-		m_strTsPath     = _sysProp("javax.net.ssl.trustStore");
-		m_strTsPassword = _sysProp("javax.net.ssl.trustStorePassword");
-		m_strTsType     = _sysProp("javax.net.ssl.trustStoreType");
-	}
-
-
-	private final String _sysProp(String p_strProperty)
-	{
-		try
-		{
-			return System.getProperty(p_strProperty);
-		}
-		catch (SecurityException l_e)
-		{
-			ms_log.warn("No permission to read system property " + p_strProperty + ".");
-
-			return null;
-		}
+		m_strKsPath     = System.getProperty("javax.net.ssl.keyStore");
+		m_strKsPassword = System.getProperty("javax.net.ssl.keyStorePassword");
+		m_strKsType     = System.getProperty("javax.net.ssl.keyStoreType");
+		m_strTsPath     = System.getProperty("javax.net.ssl.trustStore");
+		m_strTsPassword = System.getProperty("javax.net.ssl.trustStorePassword");
+		m_strTsType     = System.getProperty("javax.net.ssl.trustStoreType");
 	}
 
 
@@ -539,7 +524,7 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 	 * Get the key store type.
 	 * <p>Default is the value of the <code>javax.net.ssl.keyStoreType</code>
 	 * system property, if defined.
-	 * Otherwise <code>java.security.KeyStore.getDefaultType()</code> is
+	 * Otherwise {@link java.security.KeyStore#getDefaultType()} is
 	 * used as default.</p>
 	 * @return The key store type.
 	 */
@@ -553,7 +538,7 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 	 * Set the key store type.
 	 * <p>Default is the value of the <code>javax.net.ssl.keyStoreType</code>
 	 * system property, if defined.
-	 * Otherwise <code>java.security.KeyStore.getDefaultType()</code> is
+	 * Otherwise {@link java.security.KeyStore#getDefaultType()} is
 	 * used as default.</p>
 	 * @param p_strKeyStoreType The key store type.
 	 */
@@ -625,7 +610,7 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 	 * Get the trust store type.
 	 * <p>Default is the value of the <code>javax.net.ssl.trustStoreType</code>
 	 * system property, if defined.
-	 * Otherwise <code>java.security.KeyStore.getDefaultType()</code> is
+	 * Otherwise {@link java.security.KeyStore#getDefaultType()} is
 	 * used as default.</p>
 	 * @return The trust store type.
 	 */
@@ -639,7 +624,7 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 	 * Set the trust store type.
 	 * <p>Default is the value of the <code>javax.net.ssl.trustStoreType</code>
 	 * system property, if defined.
-	 * Otherwise <code>java.security.KeyStore.getDefaultType()</code> is
+	 * Otherwise {@link java.security.KeyStore#getDefaultType()} is
 	 * used as default.</p>
 	 * @param p_strTrustStoreType The trust store type.
 	 */
