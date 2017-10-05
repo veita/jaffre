@@ -27,7 +27,7 @@
 		<property name="server" ref="jaffreServer"/>
 		<property name="endpointList">
 			<list>
-				<idref local="throwException"/>
+				<idref bean="throwException"/>
 			</list>
 		</property>
 		<property name="endpointMap">
