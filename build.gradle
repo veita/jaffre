@@ -2,6 +2,7 @@
 plugins {
 	id 'java'
 	id 'jacoco'
+	id 'maven-publish'
 }
 
 
@@ -12,6 +13,7 @@ description = """jaffre"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
 
 repositories {
 	mavenCentral()
@@ -45,5 +47,14 @@ jar {
 		attributes(
 			"Implementation-Title": project.name,
 			"Implementation-Version": version)
+	}
+}
+
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
 	}
 }
