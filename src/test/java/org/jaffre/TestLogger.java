@@ -1,6 +1,5 @@
-/* $Id: $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2019 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -14,6 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
+
 
 package org.jaffre;
 
@@ -32,7 +32,7 @@ public class TestLogger implements Logger
 
 	private final DefaultTestLogger m_default = new DefaultTestLogger();
 
-	private Stack<Logger> m_stack = new Stack<Logger>();
+	private Stack<Logger> m_stack = new Stack<>();
 
 
 	public static class DefaultTestLogger extends NoopLogger

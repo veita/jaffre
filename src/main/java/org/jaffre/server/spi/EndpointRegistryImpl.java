@@ -1,6 +1,5 @@
-/* $Id: EndpointRegistryImpl.java 394 2009-03-21 20:28:26Z  $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2019 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -36,7 +35,7 @@ public class EndpointRegistryImpl implements EndpointRegistry
 {
 	private static final Logger ms_log = LoggerFactory.getLogger(EndpointRegistryImpl.class);
 
-	private volatile Map<Class<?>, Object> m_map = new HashMap<Class<?>, Object>();
+	private volatile Map<Class<?>, Object> m_map = new HashMap<>();
 
 
 	@Override
@@ -128,7 +127,7 @@ public class EndpointRegistryImpl implements EndpointRegistry
 
 		synchronized (this)
 		{
-			l_map = new HashMap<Class<?>, Object>(m_map);
+			l_map = new HashMap<>(m_map);
 
 			if (l_map.containsKey(p_interface))
 			{

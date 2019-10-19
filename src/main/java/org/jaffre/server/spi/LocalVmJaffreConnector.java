@@ -1,6 +1,5 @@
-/* $Id: LocalVmJaffreConnector.java 394 2009-03-21 20:28:26Z  $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2019 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -52,7 +51,7 @@ public final class LocalVmJaffreConnector implements JaffreConnector
 		if (m_refServer != null && m_refServer.get() != null)
 			throw new IllegalStateException("Server already registered.");
 
-		m_refServer = new WeakReference<JaffreServer>(p_server);
+		m_refServer = new WeakReference<>(p_server);
 	}
 
 
