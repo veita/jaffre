@@ -1,6 +1,5 @@
-/* $Id: JaffreException.java 394 2009-03-21 20:28:26Z  $
- *
- * (C) Copyright 2008-2013 Alexander Veit
+/*
+ * (C) Copyright 2008-2019 Alexander Veit
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -19,23 +18,16 @@
 package org.jaffre;
 
 
+import org.test.JaffreTestCaseBase;
+
+
 /**
  * @author Alexander Veit
  */
-public class JaffreException extends Exception
+public final class JaffreNoInterfaceExceptionTestCase extends JaffreTestCaseBase
 {
-	private static final long serialVersionUID = 4891525828573295597L;
-
-
-	public JaffreException(String p_strMsg)
+	public void testConstructors()
 	{
-		super(p_strMsg);
-	}
-
-
-	public JaffreException(String p_strMsg, Throwable p_cause)
-	{
-		super(p_strMsg, p_cause);
+		assertEquals("err", new JaffreNoInterfaceException("err").getMessage());
 	}
 }
-
