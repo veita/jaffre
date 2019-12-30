@@ -72,6 +72,10 @@ void runTheClient() throws Exception
 
 For code examples see the [samples directory](https://github.com/veita/jaffre/tree/master/src/samples). The JavaDocs can be found [here](http://veita.github.io/jaffre/docs/api/).
 
+## Security
+
+Jaffre makes use of Java object serialization. For this reason it is susceptible to Java deserialization attacks. It should not be used in cases where a malicious user would be able to call the server endpoints over the network.
+
 ## Dependencies
 
 Jaffre does not have any required dependencies.
