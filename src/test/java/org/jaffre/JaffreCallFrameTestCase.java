@@ -28,7 +28,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class JaffreCallFrameTestCase extends JaffreTestCaseBase
 {
-	public void testConstructorIllegalArgumentException() throws Exception
+	public void testConstructorIllegalArgumentException()
 	{
 		new JaffreCallFrame(Runnable.class, "run", null, null);
 
@@ -50,7 +50,7 @@ public final class JaffreCallFrameTestCase extends JaffreTestCaseBase
 	}
 
 
-	public void testSimple() throws Exception
+	public void testSimple()
 	{
 		final JaffreCallFrame l_frame;
 
@@ -92,7 +92,7 @@ public final class JaffreCallFrameTestCase extends JaffreTestCaseBase
 	}
 
 
-	public void testEqualsHashCode() throws Exception
+	public void testEqualsHashCode()
 	{
 		final JaffreCallFrame l_frame1;
 		final JaffreCallFrame l_frame2;

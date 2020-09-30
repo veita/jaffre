@@ -56,7 +56,7 @@ public final class DefaultJaffreServerTestCase extends JaffreTestCaseBase
 	}
 
 
-	public void testNoInterface() throws Exception
+	public void testNoInterface()
 	{
 		final DefaultJaffreServer   l_server;
 		final JaffreCallFrame       l_call;
@@ -74,7 +74,7 @@ public final class DefaultJaffreServerTestCase extends JaffreTestCaseBase
 	}
 
 
-	public void testCallRunnable() throws Exception
+	public void testCallRunnable()
 	{
 		final DefaultJaffreServer   l_server;
 		final AtomicBoolean         l_bWasHere;

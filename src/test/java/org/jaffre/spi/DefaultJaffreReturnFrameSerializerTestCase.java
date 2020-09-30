@@ -20,7 +20,6 @@ package org.jaffre.spi;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 import org.jaffre.JaffreReturnFrame;
 import org.test.JaffreTestCaseBase;
@@ -32,7 +31,6 @@ import org.test.JaffreTestCaseBase;
 public final class DefaultJaffreReturnFrameSerializerTestCase extends JaffreTestCaseBase
 {
 	public void testSerializeIllegalArgumentException01()
-		throws IOException
 	{
 		assertIAE(
 			() -> new DefaultJaffreReturnFrameSerializer().serialize(null, null),
@@ -41,7 +39,6 @@ public final class DefaultJaffreReturnFrameSerializerTestCase extends JaffreTest
 
 
 	public void testSerializeIllegalArgumentException02()
-		throws IOException
 	{
 		final JaffreReturnFrame l_frame;
 
@@ -53,7 +50,7 @@ public final class DefaultJaffreReturnFrameSerializerTestCase extends JaffreTest
 	}
 
 
-	public void testDeserializeIllegalArgumentException() throws Exception
+	public void testDeserializeIllegalArgumentException()
 	{
 		assertIAE(
 			() -> new DefaultJaffreReturnFrameSerializer().deserialize(null),
@@ -61,7 +58,8 @@ public final class DefaultJaffreReturnFrameSerializerTestCase extends JaffreTest
 	}
 
 
-	public void testSerializeDeserialize() throws Exception
+	public void testSerializeDeserialize()
+		throws Exception
 	{
 		final JaffreReturnFrame                  l_frame;
 		final DefaultJaffreReturnFrameSerializer l_ser;

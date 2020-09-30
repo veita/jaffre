@@ -29,7 +29,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class EndpointRegistryImplTestCase extends JaffreTestCaseBase
 {
-	public void testClassImplementsInterface() throws Exception
+	public void testClassImplementsInterface()
 	{
 		final EndpointRegistryImpl l_registry;
 		final Echo                 l_service;
@@ -43,7 +43,7 @@ public final class EndpointRegistryImplTestCase extends JaffreTestCaseBase
 	}
 
 
-	public void testSubclassedClassImplementsInterface() throws Exception
+	public void testSubclassedClassImplementsInterface()
 	{
 		final EndpointRegistryImpl l_registry;
 		final Echo                 l_service;

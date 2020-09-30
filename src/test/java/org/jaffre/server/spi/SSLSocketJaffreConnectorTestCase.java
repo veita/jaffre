@@ -26,7 +26,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class SSLSocketJaffreConnectorTestCase extends JaffreTestCaseBase
 {
-	public void testGetterSetter() throws Exception
+	public void testGetterSetter()
 	{
 		final SSLSocketJaffreConnector l_connector;
 

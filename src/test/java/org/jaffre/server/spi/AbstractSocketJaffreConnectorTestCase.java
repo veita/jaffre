@@ -131,7 +131,7 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 	}
 
 
-	public void testConfigureStarted() throws Exception
+	public void testConfigureStarted()
 	{
 		final AbstractSocketJaffreConnector l_connector;
 
@@ -167,7 +167,7 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 	}
 
 
-	public void testBadCofigurationParams() throws Exception
+	public void testBadCofigurationParams()
 	{
 		final AbstractSocketJaffreConnector l_connector;
 

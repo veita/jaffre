@@ -43,7 +43,7 @@ public final class LocalVmTransportTestCase extends JaffreTestCaseBase
 	}
 
 
-	public void test() throws Exception
+	public void test()
 	{
 		// setup the server
 		final JaffreServer l_server;

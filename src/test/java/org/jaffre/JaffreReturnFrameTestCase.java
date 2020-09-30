@@ -26,7 +26,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class JaffreReturnFrameTestCase extends JaffreTestCaseBase
 {
-	public void testSimple() throws Exception
+	public void testSimple()
 	{
 		final JaffreReturnFrame l_frame;
 
@@ -54,7 +54,7 @@ public final class JaffreReturnFrameTestCase extends JaffreTestCaseBase
 	}
 
 
-	public void testEqualsHashCode() throws Exception
+	public void testEqualsHashCode()
 	{
 		final JaffreReturnFrame l_frame1;
 		final JaffreReturnFrame l_frame2;
