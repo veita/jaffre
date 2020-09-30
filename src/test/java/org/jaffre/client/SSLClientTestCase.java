@@ -124,7 +124,7 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 		l_strIn  = "The rain in spain stays mainly in the plain.";
 		l_strOut = l_interface.echo(l_strIn);
 
-		assert(l_strIn.equals(l_strOut));
+		assertEquals(l_strIn, l_strOut);
 
 		m_client.dispose();
 	}
@@ -145,7 +145,7 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 		l_strIn  = "The rain in spain stays mainly in the plain.";
 		l_strOut = l_interface.echo(l_strIn);
 
-		assert(l_strIn.equals(l_strOut));
+		assertEquals(l_strIn, l_strOut);
 
 		m_client.dispose();
 	}
