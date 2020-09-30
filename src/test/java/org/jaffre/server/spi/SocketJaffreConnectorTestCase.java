@@ -24,7 +24,6 @@ import org.example.services.Greeting;
 import org.jaffre.client.spi.SocketJaffreClient;
 import org.jaffre.server.JaffreServer;
 import org.test.JaffreTestCaseBase;
-import org.test.TestPort;
 
 
 /**
@@ -34,10 +33,8 @@ public final class SocketJaffreConnectorTestCase extends JaffreTestCaseBase
 {
 	public void testSimpleRemoteCall() throws Exception
 	{
-		final int    l_iPort;
 		final String l_strGreeting;
 
-		l_iPort       = TestPort.getNext();
 		l_strGreeting = UUID.randomUUID().toString();
 
 		// setup the server
@@ -61,13 +58,14 @@ public final class SocketJaffreConnectorTestCase extends JaffreTestCaseBase
 
 		l_connector.setServer(l_server);
 		l_connector.setBindingAddress("localhost");
-		l_connector.setPort(l_iPort);
+		l_connector.setPort(0);
 		l_connector.setCoreThreadPoolSize(5);
 
 		l_connector.start();
 
 		Thread.sleep(100);
 
+		assertTrue(l_connector.getLocalPort() > 0);
 		assertEquals(5, l_connector.getCoreThreadPoolSize());
 		assertEquals(5, l_connector.getNumRunningThreads());
 
@@ -78,7 +76,7 @@ public final class SocketJaffreConnectorTestCase extends JaffreTestCaseBase
 		l_client = new SocketJaffreClient();
 
 		l_client.setServiceAddress("localhost");
-		l_client.setServicePort(l_iPort);
+		l_client.setServicePort(l_connector.getLocalPort());
 
 		// do the test
 		l_greeting = l_client.getProxy(Greeting.class);

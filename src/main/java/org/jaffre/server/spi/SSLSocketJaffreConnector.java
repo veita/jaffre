@@ -427,6 +427,16 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 	}
 
 
+	@Override
+	public int getLocalPort()
+	{
+		if (m_channel != null)
+			return m_channel.socket().getLocalPort();
+		else
+			return -1;
+	}
+
+
 	/**
 	 * Get the number of threads that are currently handling
 	 * connections.
@@ -743,12 +753,11 @@ public class SSLSocketJaffreConnector extends AbstractSocketJaffreConnector
 				// don't wait any longer
 			}
 
-			JaffreUtil.close(m_channel);
-
 			_destroySSLContext();
 		}
 		finally
 		{
+			m_channel  = JaffreUtil.close(m_channel);
 			m_bRunning = false;
 		}
 	}

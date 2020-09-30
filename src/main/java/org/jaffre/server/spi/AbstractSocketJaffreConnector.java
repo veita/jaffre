@@ -43,7 +43,7 @@ public abstract class AbstractSocketJaffreConnector implements JaffreConnector
 
 	private InetAddress m_inetAddr;
 
-	private int m_iPort = -1;
+	private int m_iPort;
 
 	private JaffreCallFrameSerializer m_serCall = new DefaultJaffreCallFrameSerializer();
 
@@ -163,12 +163,27 @@ public abstract class AbstractSocketJaffreConnector implements JaffreConnector
 	}
 
 
+	/**
+	 * Get the configured port.
+	 * <p>If <code>0</code> the system will pick up an ephemeral port.
+	 * The actual port being used when the connector is started
+	 * can be determined with the {@link #getLocalPort()} method.</p>
+	 * @return The configured port.
+	 */
 	public int getPort()
 	{
 		return m_iPort;
 	}
 
 
+	/**
+	 * Set the port to be used.
+	 * <p>If set to <code>0</code> the system will pick up an ephemeral
+	 * port. The actual port being used when the connector is started
+	 * can be determined with the {@link #getLocalPort()} method.</p>
+	 * @param p_iPort The port number.
+	 * @throws IllegalStateException If the connector is already running.
+	 */
 	public void setPort(int p_iPort)
 	{
 		if (isRunning())
@@ -179,6 +194,16 @@ public abstract class AbstractSocketJaffreConnector implements JaffreConnector
 
 		m_iPort = p_iPort;
 	}
+
+
+	/**
+	 * Get the port currently used by the connector.
+	 * <p>If the connector is currently not running,
+	 * <code>-1</code> will be returned.</p>
+	 * @return The currently used port, or <code>-1</code>
+	 *    if the connector is not running.
+	 */
+	public abstract int getLocalPort();
 
 
 	/**

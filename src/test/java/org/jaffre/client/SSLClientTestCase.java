@@ -27,7 +27,6 @@ import org.jaffre.server.JaffreServer;
 import org.jaffre.server.spi.DefaultJaffreServer;
 import org.jaffre.server.spi.SSLSocketJaffreConnector;
 import org.test.JaffreTestCaseBase;
-import org.test.TestPort;
 
 
 /**
@@ -54,7 +53,7 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 	}
 
 
-	private void setUpClientAndServer(int p_iPort)
+	private int setUpClientAndServer()
 		throws UnknownHostException, InterruptedException
 	{
 		// server
@@ -69,7 +68,7 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 
 		l_connector.setServer(l_server);
 		l_connector.setBindingAddress("localhost");
-		l_connector.setPort(p_iPort);
+		l_connector.setPort(0);
 		l_connector.setKeyStore("resources/keystore");
 		l_connector.setKeyStoreType("JCEKS");
 		l_connector.setKeyStorePassword("secret");
@@ -83,13 +82,15 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 
 		Thread.sleep(500L);
 
+		assertTrue(m_connector.getLocalPort() > 0);
+
 		// client
 		final SSLSocketJaffreClient l_client;
 
 		l_client = new SSLSocketJaffreClient();
 
 		l_client.setServiceAddress("localhost");
-		l_client.setServicePort(p_iPort);
+		l_client.setServicePort(m_connector.getLocalPort());
 		l_client.setKeyStoreType("JCEKS");
 		l_client.setKeyStore("resources/keystore");
 		l_client.setKeyStorePassword("secret");
@@ -98,12 +99,14 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 		l_client.setTrustStorePassword("secret");
 
 		m_client = l_client;
+
+		return m_connector.getLocalPort();
 	}
 
 
 	public void testMultiDispose() throws Exception
 	{
-		setUpClientAndServer(TestPort.getNext());
+		setUpClientAndServer();
 
 		m_client.dispose();
 		m_client.dispose();
@@ -117,7 +120,7 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 		final String          l_strIn;
 		final String          l_strOut;
 
-		setUpClientAndServer(TestPort.getNext());
+		setUpClientAndServer();
 
 		l_interface = m_client.getProxy(SomeTestMethods.class);
 
@@ -136,7 +139,7 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 		final String          l_strIn;
 		final String          l_strOut;
 
-		setUpClientAndServer(TestPort.getNext());
+		setUpClientAndServer();
 
 		m_client.setKeepAlive(false);
 

@@ -91,6 +91,12 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 			{
 				fail();
 			}
+
+			@Override
+			public int getLocalPort()
+			{
+				return -1;
+			}
 		};
 
 		assertEquals(1000L, l_connector.getStopTimeout());
@@ -102,7 +108,7 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 		l_connector.setBindingAddress("127.0.0.123");
 		assertEquals("127.0.0.123", l_connector.getBindingInetAddress().getHostAddress());
 
-		assertEquals(-1, l_connector.getPort());
+		assertEquals(0, l_connector.getPort());
 		assertJCE(() -> l_connector.setPort(-1));
 		l_connector.setPort(4711);
 		assertEquals(4711, l_connector.getPort());
@@ -154,6 +160,12 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 			{
 				fail();
 			}
+
+			@Override
+			public int getLocalPort()
+			{
+				return -1;
+			}
 		};
 
 		l_connector.setStopTimeout(12); // can be set after the connector has been started
@@ -189,6 +201,12 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 			public void stop()
 			{
 				fail();
+			}
+
+			@Override
+			public int getLocalPort()
+			{
+				return -1;
 			}
 		};
 
