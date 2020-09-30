@@ -18,11 +18,15 @@
 package org.jaffre.spi;
 
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -31,6 +35,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class DefaultJaffreFrameDeserializerTestCase extends JaffreTestCaseBase
 {
+	@Test
 	public void testSerializeNull() throws Exception
 	{
 		ByteArrayOutputStream l_bos;

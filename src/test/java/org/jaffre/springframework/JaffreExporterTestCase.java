@@ -18,8 +18,13 @@
 package org.jaffre.springframework;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.test.JaffreTestCaseBase;
 import org.test.PackageFile;
@@ -30,6 +35,7 @@ import org.test.PackageFile;
  */
 public final class JaffreExporterTestCase extends JaffreTestCaseBase
 {
+	@Test
 	public void test() throws Exception
 	{
 		final File                            l_fileAppContext;

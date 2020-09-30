@@ -18,12 +18,16 @@
 package org.jaffre.io;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -41,6 +45,7 @@ public final class AbstractByteBufferInputStreamTestCase extends JaffreTestCaseB
 		" of computer architecture.";
 
 
+	@Test
 	public void testReadEOF() throws Exception
 	{
 		final AbstractByteBufferInputStream l_in;
@@ -64,6 +69,7 @@ public final class AbstractByteBufferInputStreamTestCase extends JaffreTestCaseB
 	}
 
 
+	@Test
 	public void testSkipEOF() throws Exception
 	{
 		final AbstractByteBufferInputStream l_in;
@@ -86,6 +92,7 @@ public final class AbstractByteBufferInputStreamTestCase extends JaffreTestCaseB
 	}
 
 
+	@Test
 	public void testReadSingleByte() throws Exception
 	{
 		byte[] l_buf;
@@ -161,6 +168,7 @@ public final class AbstractByteBufferInputStreamTestCase extends JaffreTestCaseB
 	}
 
 
+	@Test
 	public void testReadByte() throws Exception
 	{
 		byte[] l_buf;

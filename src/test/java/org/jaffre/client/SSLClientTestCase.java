@@ -18,6 +18,9 @@
 package org.jaffre.client;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.net.UnknownHostException;
 
 import org.example.services.SomeTestMethods;
@@ -26,6 +29,9 @@ import org.jaffre.client.spi.SSLSocketJaffreClient;
 import org.jaffre.server.JaffreServer;
 import org.jaffre.server.spi.DefaultJaffreServer;
 import org.jaffre.server.spi.SSLSocketJaffreConnector;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -39,14 +45,14 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 	private SSLSocketJaffreClient m_client;
 
 
-	@Override
-	public void setUp() throws Exception
+	@BeforeEach
+	public void setUp()
 	{
 	}
 
 
-	@Override
-	public void tearDown() throws Exception
+	@AfterEach
+	public void tearDown()
 	{
 		m_connector.stop();
 		m_client.dispose();
@@ -104,6 +110,7 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 	}
 
 
+	@Test
 	public void testMultiDispose() throws Exception
 	{
 		setUpClientAndServer();
@@ -114,6 +121,7 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 	}
 
 
+	@Test
 	public void testCallThenClientDispose() throws Exception
 	{
 		final SomeTestMethods l_interface;
@@ -133,6 +141,7 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 	}
 
 
+	@Test
 	public void testCallNoKeepAlive() throws Exception
 	{
 		final SomeTestMethods l_interface;

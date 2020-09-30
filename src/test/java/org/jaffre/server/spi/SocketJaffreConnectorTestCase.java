@@ -18,11 +18,15 @@
 package org.jaffre.server.spi;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.UUID;
 
 import org.example.services.Greeting;
 import org.jaffre.client.spi.SocketJaffreClient;
 import org.jaffre.server.JaffreServer;
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -31,6 +35,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class SocketJaffreConnectorTestCase extends JaffreTestCaseBase
 {
+	@Test
 	public void testSimpleRemoteCall() throws Exception
 	{
 		final String l_strGreeting;

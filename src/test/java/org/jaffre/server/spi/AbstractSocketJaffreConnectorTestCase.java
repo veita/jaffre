@@ -18,6 +18,13 @@
 package org.jaffre.server.spi;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
@@ -28,6 +35,7 @@ import org.jaffre.JaffreReturnFrame;
 import org.jaffre.JaffreReturnFrameSerializer;
 import org.jaffre.spi.DefaultJaffreCallFrameSerializer;
 import org.jaffre.spi.DefaultJaffreReturnFrameSerializer;
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -68,6 +76,7 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 	};
 
 
+	@Test
 	public void testConfigureStoppedState() throws Exception
 	{
 		final AbstractSocketJaffreConnector l_connector;
@@ -137,6 +146,7 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 	}
 
 
+	@Test
 	public void testConfigureStarted()
 	{
 		final AbstractSocketJaffreConnector l_connector;
@@ -179,6 +189,7 @@ public final class AbstractSocketJaffreConnectorTestCase extends JaffreTestCaseB
 	}
 
 
+	@Test
 	public void testBadCofigurationParams()
 	{
 		final AbstractSocketJaffreConnector l_connector;

@@ -18,12 +18,18 @@
 package org.jaffre.server.spi;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jaffre.JAFFRE_FLAG;
 import org.jaffre.JaffreCallFrame;
 import org.jaffre.JaffreNoInterfaceException;
 import org.jaffre.JaffreReturnFrame;
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -32,6 +38,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class DefaultJaffreServerTestCase extends JaffreTestCaseBase
 {
+	@Test
 	public void testGetterSetter()
 	{
 		final DefaultJaffreServer l_server;
@@ -56,6 +63,7 @@ public final class DefaultJaffreServerTestCase extends JaffreTestCaseBase
 	}
 
 
+	@Test
 	public void testNoInterface()
 	{
 		final DefaultJaffreServer   l_server;
@@ -74,6 +82,7 @@ public final class DefaultJaffreServerTestCase extends JaffreTestCaseBase
 	}
 
 
+	@Test
 	public void testCallRunnable()
 	{
 		final DefaultJaffreServer   l_server;

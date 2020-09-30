@@ -18,22 +18,23 @@
 package org.test;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
 
 import org.jaffre.JaffreConfigurationException;
-
-import junit.framework.AssertionFailedError;
-import junit.framework.TestCase;
+import org.opentest4j.AssertionFailedError;
 
 
 /**
  * Base class for all tests of this project.
  * @author Alexander Veit
  */
-public abstract class JaffreTestCaseBase extends TestCase
+public abstract class JaffreTestCaseBase
 {
 	/**
 	 * Executes code that might throw an exception.

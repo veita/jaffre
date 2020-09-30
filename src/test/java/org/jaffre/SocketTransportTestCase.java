@@ -18,6 +18,10 @@
 package org.jaffre;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.IOException;
 
 import org.example.services.Greeting;
@@ -28,6 +32,9 @@ import org.jaffre.client.spi.SocketJaffreClient;
 import org.jaffre.server.JaffreServer;
 import org.jaffre.server.spi.DefaultJaffreServer;
 import org.jaffre.server.spi.SocketJaffreConnector;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -36,25 +43,22 @@ import org.test.JaffreTestCaseBase;
  */
 public final class SocketTransportTestCase extends JaffreTestCaseBase
 {
-	@Override
-	public void setUp() throws Exception
+	@BeforeEach
+	public void setUp()
 	{
-		super.setUp();
-
 		System.setProperty("org.jaffre.loggerClass", TestLogger.class.getName());
 	}
 
 
-	@Override
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		Thread.sleep(100);
 		TestLogger.clear();
-
-		super.tearDown();
 	}
 
 
+	@Test
 	public void testException() throws Exception
 	{
 		TestLogger.push(new TestLogger.DefaultTestLogger()
@@ -126,12 +130,14 @@ public final class SocketTransportTestCase extends JaffreTestCaseBase
 	}
 
 
+	@Test
 	public void testKeepAlive() throws Exception
 	{
 		_testKeepAlive(true);
 	}
 
 
+	@Test
 	public void testNoKeepAlive() throws Exception
 	{
 		_testKeepAlive(false);

@@ -17,8 +17,12 @@
 package org.jaffre;
 
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -32,6 +36,7 @@ public final class JaffreCookieTestCase extends JaffreTestCaseBase
 	private static final String OTHER_COOKIE = "otherCookie";
 
 
+	@Test
 	public void testLifeCycle() throws Exception
 	{
 		assertNull(JaffreCookie.get());

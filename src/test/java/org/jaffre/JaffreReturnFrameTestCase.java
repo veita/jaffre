@@ -18,6 +18,11 @@
 package org.jaffre;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -26,6 +31,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class JaffreReturnFrameTestCase extends JaffreTestCaseBase
 {
+	@Test
 	public void testSimple()
 	{
 		final JaffreReturnFrame l_frame;
@@ -54,6 +60,7 @@ public final class JaffreReturnFrameTestCase extends JaffreTestCaseBase
 	}
 
 
+	@Test
 	public void testEqualsHashCode()
 	{
 		final JaffreReturnFrame l_frame1;
@@ -61,9 +68,9 @@ public final class JaffreReturnFrameTestCase extends JaffreTestCaseBase
 
 		l_frame1 = new JaffreReturnFrame("the result value", false);
 
-		assertTrue("Any object is equal to itself.", l_frame1.equals(l_frame1));
+		assertTrue(l_frame1.equals(l_frame1), "Any object is equal to itself.");
 		assertFalse(l_frame1.equals("apply"));
-		assertEquals("hashCode must be deterministic.", l_frame1.hashCode(), l_frame1.hashCode());
+		assertEquals(l_frame1.hashCode(), l_frame1.hashCode(), "hashCode must be deterministic.");
 
 		l_frame2 = new JaffreReturnFrame("the result value", false);
 

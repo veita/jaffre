@@ -18,10 +18,13 @@
 package org.jaffre.spi;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 import org.jaffre.JaffreReturnFrame;
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -30,6 +33,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class DefaultJaffreReturnFrameSerializerTestCase extends JaffreTestCaseBase
 {
+	@Test
 	public void testSerializeIllegalArgumentException01()
 	{
 		assertIAE(
@@ -38,6 +42,7 @@ public final class DefaultJaffreReturnFrameSerializerTestCase extends JaffreTest
 	}
 
 
+	@Test
 	public void testSerializeIllegalArgumentException02()
 	{
 		final JaffreReturnFrame l_frame;
@@ -50,6 +55,7 @@ public final class DefaultJaffreReturnFrameSerializerTestCase extends JaffreTest
 	}
 
 
+	@Test
 	public void testDeserializeIllegalArgumentException()
 	{
 		assertIAE(
@@ -58,6 +64,7 @@ public final class DefaultJaffreReturnFrameSerializerTestCase extends JaffreTest
 	}
 
 
+	@Test
 	public void testSerializeDeserialize()
 		throws Exception
 	{

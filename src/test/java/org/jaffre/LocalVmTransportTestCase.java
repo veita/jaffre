@@ -18,6 +18,9 @@
 package org.jaffre;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.example.services.Greeting;
 import org.example.services.GreetingService;
 import org.jaffre.client.JaffreClient;
@@ -25,6 +28,8 @@ import org.jaffre.client.spi.LocalVmJaffreClient;
 import org.jaffre.server.JaffreServer;
 import org.jaffre.server.spi.DefaultJaffreServer;
 import org.jaffre.server.spi.LocalVmJaffreConnector;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -33,16 +38,15 @@ import org.test.JaffreTestCaseBase;
  */
 public final class LocalVmTransportTestCase extends JaffreTestCaseBase
 {
-	@Override
-	protected void tearDown() throws Exception
+	@AfterEach
+	protected void tearDown()
 	{
 		System.gc();
 		assertNull(LocalVmJaffreConnector.getInstance().getServer());
-
-		super.tearDown();
 	}
 
 
+	@Test
 	public void test()
 	{
 		// setup the server

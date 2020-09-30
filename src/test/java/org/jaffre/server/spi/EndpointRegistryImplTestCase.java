@@ -18,9 +18,12 @@
 package org.jaffre.server.spi;
 
 
+import static org.junit.jupiter.api.Assertions.assertSame;
+
 import org.example.services.DerivedEchoService;
 import org.example.services.Echo;
 import org.example.services.EchoService;
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -29,6 +32,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class EndpointRegistryImplTestCase extends JaffreTestCaseBase
 {
+	@Test
 	public void testClassImplementsInterface()
 	{
 		final EndpointRegistryImpl l_registry;
@@ -43,6 +47,7 @@ public final class EndpointRegistryImplTestCase extends JaffreTestCaseBase
 	}
 
 
+	@Test
 	public void testSubclassedClassImplementsInterface()
 	{
 		final EndpointRegistryImpl l_registry;

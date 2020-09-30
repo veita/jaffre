@@ -26,12 +26,14 @@ dependencies {
 	api group: 'org.springframework', name: 'spring-context', version: '5.2.+'
 
 	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.+'
-	testImplementation group: 'junit',             name: 'junit',             version: '4.+'
 
 	testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.+'
-	testRuntimeOnly group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.+'
 }
 
+
+test {
+	useJUnitPlatform()
+}
 
 jacocoTestReport {
 	reports {

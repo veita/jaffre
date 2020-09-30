@@ -18,6 +18,9 @@
 package org.jaffre;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -26,6 +29,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class JaffreNoInterfaceExceptionTestCase extends JaffreTestCaseBase
 {
+	@Test
 	public void testConstructors()
 	{
 		assertEquals("err", new JaffreNoInterfaceException("err").getMessage());

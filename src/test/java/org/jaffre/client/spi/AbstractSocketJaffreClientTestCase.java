@@ -18,6 +18,11 @@
 package org.jaffre.client.spi;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -25,9 +30,9 @@ import java.util.concurrent.Callable;
 
 import org.jaffre.spi.DefaultJaffreCallFrameSerializer;
 import org.jaffre.spi.DefaultJaffreReturnFrameSerializer;
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 import org.test.JaffreTestCaseBase;
-
-import junit.framework.AssertionFailedError;
 
 
 /**
@@ -35,6 +40,7 @@ import junit.framework.AssertionFailedError;
  */
 public final class AbstractSocketJaffreClientTestCase extends JaffreTestCaseBase
 {
+	@Test
 	public void testConfigure()
 		throws UnknownHostException
 	{
@@ -81,6 +87,7 @@ public final class AbstractSocketJaffreClientTestCase extends JaffreTestCaseBase
 	}
 
 
+	@Test
 	public void testBadCofigurationParams()
 	{
 		final AbstractSocketJaffreClient l_client;
@@ -100,6 +107,7 @@ public final class AbstractSocketJaffreClientTestCase extends JaffreTestCaseBase
 
 
 	@SuppressWarnings("unchecked")
+	@Test
 	public void testGetProxy() throws Exception
 	{
 		final AbstractSocketJaffreClient l_client;

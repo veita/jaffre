@@ -18,6 +18,11 @@
 package org.jaffre.io;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -25,6 +30,7 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -42,6 +48,7 @@ public final class AbstractByteBufferOutputStreamTestCase extends JaffreTestCase
 		" of computer architecture.";
 
 
+	@Test
 	public void testNotConsumed() throws IOException
 	{
 		final OutputStream  l_out;
@@ -70,6 +77,7 @@ public final class AbstractByteBufferOutputStreamTestCase extends JaffreTestCase
 	}
 
 
+	@Test
 	public void testConsumed() throws IOException
 	{
 		final ByteBuffer    l_buffer;
@@ -96,7 +104,7 @@ public final class AbstractByteBufferOutputStreamTestCase extends JaffreTestCase
 				else
 				{
 					assertSame(WRITE_MODE.WRITE, p_mode);
-					assertEquals("Unexpected integer value", 0, l_intCnt.get());
+					assertEquals(0, l_intCnt.get(), "Unexpected integer value.");
 
 					p_buffer.get(l_buf, 0, 16);
 				}
@@ -117,6 +125,7 @@ public final class AbstractByteBufferOutputStreamTestCase extends JaffreTestCase
 	}
 
 
+	@Test
 	public void testSimple() throws IOException
 	{
 		final ByteBuffer            l_buffer;

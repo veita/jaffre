@@ -18,6 +18,9 @@
 package org.jaffre;
 
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import org.junit.jupiter.api.Test;
 import org.test.JaffreTestCaseBase;
 
 
@@ -26,6 +29,7 @@ import org.test.JaffreTestCaseBase;
  */
 public final class JaffreNoReturnFrameExceptionTestCase extends JaffreTestCaseBase
 {
+	@Test
 	public void testConstructors()
 	{
 		assertNull(new JaffreNoReturnFrameException().getMessage());
