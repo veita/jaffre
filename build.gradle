@@ -6,10 +6,12 @@ plugins {
 }
 
 
-group   = 'org.jaffre'
-version = '1.0.0-SNAPSHOT'
+group       = 'org.jaffre'
+version     = '1.0.0-SNAPSHOT'
+description = 'jaffre'
 
-description = """jaffre"""
+ext.buildCommit = 'git describe --always --tags --dirty=-dirty'.execute().text.trim()
+
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -45,8 +47,9 @@ jar {
 	manifest {
 		from("src/main/resources/META-INF/MANIFEST.MF")
 		attributes(
-			"Implementation-Title": project.name,
-			"Implementation-Version": version)
+			"Implementation-Title":   project.name,
+			"Implementation-Version": archiveVersion.get(),
+			"Git-Commit":             buildCommit)
 	}
 }
 
@@ -58,3 +61,4 @@ publishing {
 		}
 	}
 }
+
