@@ -8,3 +8,6 @@
 /docs/
 /target/
 /build/
+
+*.swp
+
