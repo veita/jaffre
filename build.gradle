@@ -10,7 +10,9 @@ group       = 'org.jaffre'
 version     = '1.0.0-SNAPSHOT'
 description = 'jaffre'
 
-ext.buildCommit = 'git describe --always --tags --dirty=-dirty'.execute().text.trim()
+ext.buildCommit    = 'git describe --always --tags --dirty=-dirty'.execute().text.trim()
+ext.buildTimestamp = java.time.format.DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.now())
+ext.buildJdk       = "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})"
 
 
 sourceCompatibility = 1.8
@@ -45,11 +47,16 @@ jacocoTestReport {
 
 jar {
 	manifest {
-		from("src/main/resources/META-INF/MANIFEST.MF")
+		from('src/main/resources/META-INF/MANIFEST.MF')
 		attributes(
-			"Implementation-Title":   project.name,
-			"Implementation-Version": archiveVersion.get(),
-			"Git-Commit":             buildCommit)
+			'Specification-Title':    'jaffre',
+			'Specification-Version':  '1.0',
+			'Implementation-Title':   project.name,
+			'Implementation-Version': archiveVersion.get(),
+			'Build-Revision':         buildCommit,
+			'Build-Timestamp':        buildTimestamp,
+			'Build-Jdk':              buildJdk
+			)
 	}
 }
 
