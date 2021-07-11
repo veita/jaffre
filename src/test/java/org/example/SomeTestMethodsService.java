@@ -50,6 +50,6 @@ public final class SomeTestMethodsService implements SomeTestMethods
 
 		l_class = Class.forName(p_strExceptionClass);
 
-		throw (Exception)(l_class.newInstance());
+		throw (Exception)(l_class.getDeclaredConstructor().newInstance());
 	}
 }

@@ -67,7 +67,7 @@ public class JaffreTestServer
 
 			l_class = Class.forName(p_strExceptionClass);
 
-			throw (Exception)(l_class.newInstance());
+			throw (Exception)(l_class.getDeclaredConstructor().newInstance());
 		}
 	}
 
