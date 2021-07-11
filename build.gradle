@@ -26,8 +26,8 @@ repositories {
 
 dependencies {
 	api group: 'org.slf4j',           name: 'slf4j-api',      version: '1.7.+'
-	api group: 'org.springframework', name: 'spring-core',    version: '5.2.+'
-	api group: 'org.springframework', name: 'spring-context', version: '5.2.+'
+	api group: 'org.springframework', name: 'spring-core',    version: '5.+'
+	api group: 'org.springframework', name: 'spring-context', version: '5.+'
 
 	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.+'
 	testImplementation group: 'junit',             name: 'junit',             version: '4.+'
@@ -39,11 +39,12 @@ dependencies {
 
 jacocoTestReport {
 	reports {
-		xml.required  =  true
+		xml.required  = true
 		html.required = true
 		csv.required  = false
 	}
 }
+
 
 jar {
 	manifest {
@@ -56,7 +57,7 @@ jar {
 			'Build-Revision':         buildCommit,
 			'Build-Timestamp':        buildTimestamp,
 			'Build-Jdk':              buildJdk
-			)
+		)
 	}
 }
 
@@ -68,4 +69,3 @@ publishing {
 		}
 	}
 }
-
