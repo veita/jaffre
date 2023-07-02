@@ -15,8 +15,10 @@ ext.buildTimestamp = java.time.format.DateTimeFormatter.ISO_INSTANT.format(java.
 ext.buildJdk       = "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})"
 
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+}
 
 
 repositories {
