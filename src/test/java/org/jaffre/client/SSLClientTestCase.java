@@ -54,8 +54,8 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 	@AfterEach
 	public void tearDown()
 	{
-		m_connector.stop();
 		m_client.dispose();
+		m_connector.stop();
 	}
 
 
