@@ -245,11 +245,7 @@ public abstract class AbstractByteBufferInputStream extends InputStream
 
 		p_buffer.compact();
 
-		if ((l_iRead = read(p_buffer)) == 0)
-		{
-			throw new IOException
-				("No bytes were read even though the end of input has not been reached.");
-		}
+		l_iRead = read(p_buffer);
 
 		assert p_buffer.remaining() >= l_iRead;
 

@@ -515,18 +515,23 @@ public final class SSLUtil
 		read_loop:
 		while (!p_sslEngine.isInboundDone())
 		{
-			final int             l_iRead;
 			final SSLEngineResult l_res;
+			final Status          l_status;
 
 			p_inNetBuf.flip();
-			l_res = p_sslEngine.unwrap(p_inNetBuf, p_inAppBuf);
+
+			l_res    = p_sslEngine.unwrap(p_inNetBuf, p_inAppBuf);
+			l_status = l_res.getStatus();
+
 			p_inNetBuf.compact();
 			p_inAppBuf.clear();
 
-			switch (l_res.getStatus())
+			switch (l_status)
 			{
 			case OK:
 			case BUFFER_UNDERFLOW:
+				final int l_iRead;
+
 				l_iRead = p_channel.read(p_inNetBuf);
 
 				if (l_iRead == -1)

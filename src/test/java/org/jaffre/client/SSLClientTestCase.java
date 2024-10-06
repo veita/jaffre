@@ -48,8 +48,8 @@ public final class SSLClientTestCase extends JaffreTestCaseBase
 	@Override
 	public void tearDown() throws Exception
 	{
-		m_connector.stop();
 		m_client.dispose();
+		m_connector.stop();
 	}
 
 
